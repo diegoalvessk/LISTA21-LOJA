@@ -39,8 +39,98 @@ console o nome do Vendedor e o ValorTotal da venda.
 
 */
 
-class Funcionario {
-    nomeFuncionario
-    salarioFuncionario
+class Funcionario{
+    Nome 
+    Salario 
+
+    constructor(){
+        this.Nome = prompt("Informe o nome do funcionario.")
+        this.Salario = prompt("Informe o valor do salario.")
+        nomes[indexFuncionario] = this.Nome
+        salarios[indexFuncionario] = this.Salario
+        indexFuncionario++
+    }
+}
+
+class Gerente extends Funcionario{
+    departamento = []
+
+    constructor(){
+        super()
+        this.departamento = prompt("Informe o seu departamento.")
+        nomesGerente[indexGerente] = nomes[indexFuncionario - 1]
+        salariosGerente[indexGerente] = salarios[indexFuncionario - 1]
+        departamentos[indexGerente] = this.departamento
+        indexGerente++
+    }
+
+    ExibirInformacoes(nomeGerente){
+        for (let index = 0; index < indexGerente; index++) {
+                if(nomeGerente == nomesGerente[index]){
+                    alert("Nome do gerente: + " + nomesGerente[index] + "\n" + "Salario do gerente: " + salariosGerente[index] + "\n" + "Departamento do gerente: " + departamentos[index])
+                }else{
+                    alert("Não existe nenhum gerente com esse nome no nosso sitesma.")
+                }
+        }
+    }
+
+
     
 }
+
+class Vendedor extends Funcionario{
+    PercentualComissao = []
+
+    constructor(){
+       super()
+       this.PercentualComissao = parseInt(prompt("Informe o percentual da sua comissão."))
+       nomesVendedor[indexVendedor] = nomes[indexFuncionario - 1]
+       salariosVendedor[indexVendedor] = salarios[indexFuncionario - 1]
+       PercentualComissoes[indexVendedor] = this.PercentualComissao
+
+    }
+}
+
+let gerente
+let vendedor
+let nomes = []
+let salarios = []
+let nomesGerente = []
+let salariosGerente = []
+let nomesVendedor = []
+let salariosVendedor = []
+let departamentos = []
+let PercentualComissoes = []
+let indexFuncionario = 0
+let indexGerente = 0
+let indexVendedor = 0
+let nomeGerente
+        let desejar = "0"
+
+        do {
+            desejar = prompt("O que deseja fazer?" + "\n" + "1 = novo gerente. " + "\n" + "2 = novo vendedor." + "\n" + "3 = Pesquisar gerente (Só pode pesquisar se já existir um gerente cadastrado)." + "\n" + "4 = Devolver o Livro." + "\n" + "5 = Sair do site")
+            switch (desejar) {
+                case "1":
+                    gerente = new Gerente()
+                    break;
+                case "2":
+                    vendedor = new Vendedor()
+                    break;
+
+                case "3":
+                    nomeGerente = prompt("Informe o nome do gerente que deseja buscar. ")
+                    gerente.ExibirInformacoes(nomeGerente)
+                    break;
+
+                case "4":
+                  
+                    break;
+
+                case "5":
+                    alert("Obrigado por usar nosso site!")
+                    break;
+
+                default:
+                    break;
+            }
+        } while (desejar != "5");
