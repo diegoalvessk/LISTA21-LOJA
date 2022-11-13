@@ -98,8 +98,8 @@ class Vendedor extends Funcionario{
         let cont = 0
         for (let index = 0; index < indexVendedor; index++) {
                 if(nomeVendedor == nomesVendedor[index]){
-                    salarioPercentual = (salariosVendedor[index]/100) * (100 + PercentualComissoes[index])
-                    alert("o seu salario acrescido do percentual é: " + salarioPercentual)
+                    salarioPercentual[index] = (salariosVendedor[index]/100) * (100 + PercentualComissoes[index])
+                    alert("o seu salario acrescido do percentual é: " + salarioPercentual[index])
                     cont++
                 }
         }
@@ -107,6 +107,30 @@ class Vendedor extends Funcionario{
         if(cont = 0){
             alert("Não existe nenum vendedor com este nome!")
         }
+    }
+
+    ExibirInformacoes(nomeVendedor){
+        let cont = 0
+        for (let index = 0; index < indexVendedor; index++) {
+                if(nomeVendedor == nomesVendedor[index]){
+                    salarioPercentual[index] = (salariosVendedor[index]/100) * (100 + PercentualComissoes[index])
+                    cont++
+                }
+        }
+
+        if(cont == 0){
+            alert("Não existe nenum vendedor com este nome!")
+        }
+
+        let cont3 = 0
+        for (let index = 0; index < indexVendedor; index++) {
+                if(nomeVendedor == nomesVendedor[index]){
+                    alert("Nome do vendedor: " + nomesVendedor[index] + "\n" + "Salario do vendedor: " 
+                    + salariosVendedor[index] + "\n" + "Salario percentual do vendedor: " + salarioPercentual[index] + "\n" + "Percentual do vendedor: " + PercentualComissoes[index])
+                    cont3++
+                }
+        }
+
     }
 }
 
@@ -126,12 +150,12 @@ let indexVendedor = 0
 let nomeGerente
 let nomeVendedor
 let desejar = "0"
-let salarioPercentual = 0
+let salarioPercentual = []
 
         do {
             desejar = prompt("O que deseja fazer?" + "\n" + "1 = novo gerente. " + "\n" + "2 = novo vendedor." 
             + "\n" + "3 = Pesquisar gerente (Só pode pesquisar se já existir um gerente cadastrado)." 
-            + "\n" + "4 = Calcular o salario do vendedor acrescido do percentual de vendas." + "\n" + "5 = Sair do site")
+            + "\n" + "4 = Calcular o salario do vendedor acrescido do percentual de vendas." + "\n" + "5 = Exibir informações de um vendedor" + "\n" + "6 = Sair do site")
             switch (desejar) {
                 case "1":
                     gerente = new Gerente()
@@ -151,10 +175,15 @@ let salarioPercentual = 0
                     break;
 
                 case "5":
+                    nomeVendedor = prompt("Informe o nome do vendedor que deseja buscar. ")
+                    vendedor.ExibirInformacoes(nomeVendedor)
+                    break;
+
+                case "6":
                     alert("Obrigado por usar nosso site!")
                     break;
 
                 default:
                     break;
             }
-        } while (desejar != "5");
+        } while (desejar != "6");
