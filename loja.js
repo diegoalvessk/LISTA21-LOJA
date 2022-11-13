@@ -45,7 +45,7 @@ class Funcionario{
 
     constructor(){
         this.Nome = prompt("Informe o nome do funcionario.")
-        this.Salario = prompt("Informe o valor do salario.")
+        this.Salario = parseInt(prompt("Informe o valor do salario."))
         nomes[indexFuncionario] = this.Nome
         salarios[indexFuncionario] = this.Salario
         indexFuncionario++
@@ -65,12 +65,16 @@ class Gerente extends Funcionario{
     }
 
     ExibirInformacoes(nomeGerente){
+        let cont2 = 0
         for (let index = 0; index < indexGerente; index++) {
                 if(nomeGerente == nomesGerente[index]){
                     alert("Nome do gerente: + " + nomesGerente[index] + "\n" + "Salario do gerente: " + salariosGerente[index] + "\n" + "Departamento do gerente: " + departamentos[index])
-                }else{
-                    alert("Não existe nenhum gerente com esse nome no nosso sitesma.")
+                    cont2++
                 }
+        }
+
+        if(cont2 = 0){
+            alert("Não existe nenhum gerente com esse nome no nosso sitesma.")
         }
     }
 
@@ -87,7 +91,22 @@ class Vendedor extends Funcionario{
        nomesVendedor[indexVendedor] = nomes[indexFuncionario - 1]
        salariosVendedor[indexVendedor] = salarios[indexFuncionario - 1]
        PercentualComissoes[indexVendedor] = this.PercentualComissao
+       indexVendedor++
+    }
 
+    CalcularSalario(nomeVendedor){
+        let cont = 0
+        for (let index = 0; index < indexVendedor; index++) {
+                if(nomeVendedor == nomesVendedor[index]){
+                    salarioPercentual = (salariosVendedor[index]/100) * (100 + PercentualComissoes[index])
+                    alert("o seu salario acrescido do percentual é: " + salarioPercentual)
+                    cont++
+                }
+        }
+
+        if(cont = 0){
+            alert("Não existe nenum vendedor com este nome!")
+        }
     }
 }
 
@@ -105,10 +124,14 @@ let indexFuncionario = 0
 let indexGerente = 0
 let indexVendedor = 0
 let nomeGerente
-        let desejar = "0"
+let nomeVendedor
+let desejar = "0"
+let salarioPercentual = 0
 
         do {
-            desejar = prompt("O que deseja fazer?" + "\n" + "1 = novo gerente. " + "\n" + "2 = novo vendedor." + "\n" + "3 = Pesquisar gerente (Só pode pesquisar se já existir um gerente cadastrado)." + "\n" + "4 = Devolver o Livro." + "\n" + "5 = Sair do site")
+            desejar = prompt("O que deseja fazer?" + "\n" + "1 = novo gerente. " + "\n" + "2 = novo vendedor." 
+            + "\n" + "3 = Pesquisar gerente (Só pode pesquisar se já existir um gerente cadastrado)." 
+            + "\n" + "4 = Calcular o salario do vendedor acrescido do percentual de vendas." + "\n" + "5 = Sair do site")
             switch (desejar) {
                 case "1":
                     gerente = new Gerente()
@@ -123,7 +146,8 @@ let nomeGerente
                     break;
 
                 case "4":
-                  
+                    nomeVendedor = prompt("Informe o nome do vendedor que deseja calcular o salario.")
+                    vendedor.CalcularSalario(nomeVendedor)
                     break;
 
                 case "5":
