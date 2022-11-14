@@ -137,8 +137,29 @@ class Vendedor extends Funcionario{
 class Produto{
     NomeProduto
     ValorProduto
+
+    constructor(){
+        this.NomeProduto = prompt("Informe o nome do produto.")
+        this.ValorProduto = prompt("Informe o valor do produto")
+        NomeProduto[indexProduto] = this.NomeProduto
+        ValorProduto[indexProduto] = this.ValorProduto
+        indexProduto++
+    }
 }
 
+class Venda{
+    Vendedor
+    ListaDeProdutos
+    ValorTotal
+
+    constructor(){
+        this.Vendedor.vendedor
+    }
+}
+
+let NomeProduto = []
+let ValorProduto = []
+let indexProduto = 0
 let gerente
 let vendedor
 let nomes = []
@@ -160,7 +181,12 @@ let salarioPercentual = []
         do {
             desejar = prompt("O que deseja fazer?" + "\n" + "1 = novo gerente. " + "\n" + "2 = novo vendedor." 
             + "\n" + "3 = Pesquisar gerente (Só pode pesquisar se já existir um gerente cadastrado)." 
-            + "\n" + "4 = Calcular o salario do vendedor acrescido do percentual de vendas." + "\n" + "5 = Exibir informações de um vendedor" + "\n" + "6 = Sair do site")
+            + "\n" + "4 = Calcular o salario do vendedor acrescido do percentual de vendas." 
+            + "\n" + "5 = Exibir informações de um vendedor" + "\n" 
+            + "6 = Sair do site"
+            + "\n" + "7 = Exibir informações de um vendedor" + "\n" 
+            + "\n" + "8 = Exibir informações de um vendedor" + "\n"
+            + "\n" + "9 = Sair do site" + "\n")
             switch (desejar) {
                 case "1":
                     gerente = new Gerente()
@@ -191,4 +217,4 @@ let salarioPercentual = []
                 default:
                     break;
             }
-        } while (desejar != "6");
+        } while (desejar != "9");
