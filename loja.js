@@ -22,7 +22,7 @@ PARTE 2
 
 1. Criar uma classe Produto com as propriedades Nome e Valor;
 
-2. Criar a classe Venda com as propriedades Vendedor que deve ser um objeto da
+2. Criar a classe Venda com as  propriedades Vendedor que deve ser um objeto da
 classe Vendedor criada anteriormente, ListaDeProdutos que deve ser um array e
 ValorTotal;
 
@@ -132,6 +132,11 @@ class Vendedor extends Funcionario{
         }
 
     }
+}
+
+class Produto{
+    NomeProduto
+    ValorProduto
 }
 
 let gerente
