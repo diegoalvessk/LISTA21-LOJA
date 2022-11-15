@@ -58,9 +58,7 @@ class Gerente extends Funcionario{
     constructor(){
         super()
         this.departamento = prompt("Informe o seu departamento.")
-        nomesGerente[indexGerente] = nomes[indexFuncionario - 1]
-        salariosGerente[indexGerente] = salarios[indexFuncionario - 1]
-        departamentos[indexGerente] = this.departamento
+        gerentes[indexGerente] = gerente
         indexGerente++
     }
 
@@ -177,6 +175,7 @@ let nomeGerente
 let nomeVendedor
 let desejar = "0"
 let salarioPercentual = []
+let gerentes = []
 
         do {
             desejar = prompt("O que deseja fazer?" + "\n" + "1 = novo gerente. " + "\n" + "2 = novo vendedor." 
@@ -184,8 +183,8 @@ let salarioPercentual = []
             + "\n" + "4 = Calcular o salario do vendedor acrescido do percentual de vendas." 
             + "\n" + "5 = Exibir informações de um vendedor" + "\n" 
             + "6 = Sair do site"
-            + "\n" + "7 = Exibir informações de um vendedor" + "\n" 
-            + "\n" + "8 = Exibir informações de um vendedor" + "\n"
+            + "\n" + "7 = Exibir informações de um vendedor" 
+            + "\n" + "8 = Exibir informações de um vendedor"
             + "\n" + "9 = Sair do site" + "\n")
             switch (desejar) {
                 case "1":
