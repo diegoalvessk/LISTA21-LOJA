@@ -46,27 +46,23 @@ class Funcionario{
     constructor(){
         this.Nome = prompt("Informe o nome do funcionario.")
         this.Salario = parseInt(prompt("Informe o valor do salario."))
-        nomes[indexFuncionario] = this.Nome
-        salarios[indexFuncionario] = this.Salario
-        indexFuncionario++
     }
 }
 
 class Gerente extends Funcionario{
-    departamento = []
+    departamento 
 
     constructor(){
         super()
         this.departamento = prompt("Informe o seu departamento.")
-        gerentes[indexGerente] = gerente
-        indexGerente++
+       
     }
 
     ExibirInformacoes(nomeGerente){
         let cont2 = 0
-        for (let index = 0; index < indexGerente; index++) {
-                if(nomeGerente == nomesGerente[index]){
-                    alert("Nome do gerente: + " + nomesGerente[index] + "\n" + "Salario do gerente: " + salariosGerente[index] + "\n" + "Departamento do gerente: " + departamentos[index])
+        for (let index = 0; index < gerentes.length; index++) {
+                if(nomeGerente == gerentes[index].Nome){
+                    alert("Nome do gerente: " + gerentes[index].Nome + "\n" + "Salario do gerente: " + gerentes[index].Salario + "\n" + "Departamento do gerente: " + gerentes[index].departamento)
                     cont2++
                 }
         }
@@ -81,37 +77,34 @@ class Gerente extends Funcionario{
 }
 
 class Vendedor extends Funcionario{
-    PercentualComissao = []
+    PercentualComissao 
 
     constructor(){
        super()
        this.PercentualComissao = parseInt(prompt("Informe o percentual da sua comissão."))
-       nomesVendedor[indexVendedor] = nomes[indexFuncionario - 1]
-       salariosVendedor[indexVendedor] = salarios[indexFuncionario - 1]
-       PercentualComissoes[indexVendedor] = this.PercentualComissao
-       indexVendedor++
+        
     }
 
     CalcularSalario(nomeVendedor){
         let cont = 0
-        for (let index = 0; index < indexVendedor; index++) {
-                if(nomeVendedor == nomesVendedor[index]){
-                    salarioPercentual[index] = (salariosVendedor[index]/100) * (100 + PercentualComissoes[index])
+        for (let index = 0; index < vendedores.length; index++) {
+                if(nomeVendedor == vendedores[index].Nome){
+                    salarioPercentual[index] = (vendedores[index].Salario/100) * (100 + vendedores[index].PercentualComissao)
                     alert("o seu salario acrescido do percentual é: " + salarioPercentual[index])
                     cont++
                 }
         }
 
-        if(cont = 0){
+        if(cont == 0){
             alert("Não existe nenum vendedor com este nome!")
         }
     }
 
     ExibirInformacoes(nomeVendedor){
         let cont = 0
-        for (let index = 0; index < indexVendedor; index++) {
-                if(nomeVendedor == nomesVendedor[index]){
-                    salarioPercentual[index] = (salariosVendedor[index]/100) * (100 + PercentualComissoes[index])
+        for (let index = 0; index < vendedores.length; index++) {
+                if(nomeVendedor == vendedores[index].Nome){
+                    salarioPercentual[index] = (vendedores[index].Salario/100) * (100 + vendedores[index].PercentualComissao)
                     cont++
                 }
         }
@@ -120,12 +113,10 @@ class Vendedor extends Funcionario{
             alert("Não existe nenum vendedor com este nome!")
         }
 
-        let cont3 = 0
-        for (let index = 0; index < indexVendedor; index++) {
-                if(nomeVendedor == nomesVendedor[index]){
-                    alert("Nome do vendedor: " + nomesVendedor[index] + "\n" + "Salario do vendedor: " 
-                    + salariosVendedor[index] + "\n" + "Salario percentual do vendedor: " + salarioPercentual[index] + "\n" + "Percentual do vendedor: " + PercentualComissoes[index])
-                    cont3++
+        for (let index = 0; index < vendedores.length; index++) {
+                if(nomeVendedor == vendedores[index].Nome){
+                    alert("Nome do vendedor: " + vendedores[index].Nome + "\n" + "Salario do vendedor: " 
+                    + vendedores[index].Salario + "\n" + "Salario percentual do vendedor: " + salarioPercentual[index] + "\n" + "Percentual do vendedor: " + vendedores[index].PercentualComissao)
                 }
         }
 
@@ -138,60 +129,94 @@ class Produto{
 
     constructor(){
         this.NomeProduto = prompt("Informe o nome do produto.")
-        this.ValorProduto = prompt("Informe o valor do produto")
-        NomeProduto[indexProduto] = this.NomeProduto
-        ValorProduto[indexProduto] = this.ValorProduto
-        indexProduto++
+        this.ValorProduto = parseInt(prompt("Informe o valor do produto"))
     }
 }
 
-class Venda{
+class Vendas{
     Vendedor
-    ListaDeProdutos
-    ValorTotal
+    ListaDeProdutos = []
+    ValorTotal = 0
 
-    constructor(){
-        this.Vendedor.vendedor
+    constructor(vendedor){
+        this.Vendedor = vendedor
+
+        do {
+            contador = 0
+            desejar = prompt("Deseja adicionar um produto ou finalizar sua compra? 1 = adicionar mais produtos e 2 = finalizar")
+            if(desejar == "1"){
+                produtoVenda = prompt("Qual nome do produto que deseja adicionar ao seu carrinho?")
+                for (let index = 0; index < produtos.length; index++) {
+                    if(produtoVenda == produtos[index].NomeProduto){
+                        alert("Produto adicionado com sucesso!")
+                        produtoVenda = produtos[index]
+                        this.AdicionarProduto(produtoVenda)
+                        contador++
+                    }
+                }
+
+                if(contador == 0){
+                    alert("Não existe produto com este nome!")
+                }
+            }
+
+            if(desejar == "2"){
+                alert("Obrigado por usar nossos serviços!")
+                this.CalcularTotal()
+            }
+        } while (desejar != "2");
+    }
+
+    AdicionarProduto(produto){
+        this.ListaDeProdutos.push(produto)
+    }
+
+    CalcularTotal(){
+        for (let index = 0; index < this.ListaDeProdutos.length; index++) {
+            this.ValorTotal = this.ValorTotal + this.ListaDeProdutos[index].ValorProduto
+        }
+            this.FinalizarVenda()
+    }
+
+    FinalizarVenda(){
+        alert("O nome do vendedor responsavel pela venda é: " + this.Vendedor + "." + "\n" + "O valor total da compra foi de: " + this.ValorTotal)
     }
 }
 
-let NomeProduto = []
-let ValorProduto = []
-let indexProduto = 0
+
 let gerente
 let vendedor
-let nomes = []
-let salarios = []
-let nomesGerente = []
-let salariosGerente = []
-let nomesVendedor = []
-let salariosVendedor = []
-let departamentos = []
-let PercentualComissoes = []
-let indexFuncionario = 0
-let indexGerente = 0
-let indexVendedor = 0
 let nomeGerente
 let nomeVendedor
+let produto
+let venda
 let desejar = "0"
 let salarioPercentual = []
 let gerentes = []
+let vendedores = []
+let produtos = []
+let vendas = []
+let produtoVenda
+let contador = 0
 
         do {
-            desejar = prompt("O que deseja fazer?" + "\n" + "1 = novo gerente. " + "\n" + "2 = novo vendedor." 
+            desejar = prompt("O que deseja fazer?" 
+            + "\n" + "1 = novo gerente. " 
+            + "\n" + "2 = novo vendedor." 
             + "\n" + "3 = Pesquisar gerente (Só pode pesquisar se já existir um gerente cadastrado)." 
             + "\n" + "4 = Calcular o salario do vendedor acrescido do percentual de vendas." 
-            + "\n" + "5 = Exibir informações de um vendedor" + "\n" 
-            + "6 = Sair do site"
-            + "\n" + "7 = Exibir informações de um vendedor" 
-            + "\n" + "8 = Exibir informações de um vendedor"
-            + "\n" + "9 = Sair do site" + "\n")
+            + "\n" + "5 = Exibir informações de um vendedor." 
+            + "\n" + "6 = Criar um produto da loja."
+            + "\n" + "7 = Criar uma venda." 
+            + "\n" + "8 = Sair do site" + "\n")
             switch (desejar) {
                 case "1":
                     gerente = new Gerente()
+                    gerentes.push(gerente)
                     break;
                 case "2":
                     vendedor = new Vendedor()
+                    vendedores.push(vendedor)
                     break;
 
                 case "3":
@@ -210,10 +235,31 @@ let gerentes = []
                     break;
 
                 case "6":
-                    alert("Obrigado por usar nosso site!")
-                    break;
+                    produto = new Produto()
+                    produtos.push(produto)
+                break;
+
+                case "7":
+                    let cont = 0
+                    nomeVendedor =  prompt("Informe o nome do vendedor que está realizando está venda.")
+
+                                for (let index = 0; index < vendedores.length; index++) {
+                                    if(nomeVendedor == vendedores[index].Nome){
+                                        nomeVendedor = vendedores[index].Nome
+                                        cont++
+                                    }
+                                }
+        
+                                if(cont == 0){
+                                    alert("Não existe nenum vendedor com este nome!")
+                                }
+
+
+                    venda = new Vendas(nomeVendedor)
+                    vendas.push(venda)
+                break;
 
                 default:
                     break;
             }
-        } while (desejar != "9");
+        } while (desejar != "8");
