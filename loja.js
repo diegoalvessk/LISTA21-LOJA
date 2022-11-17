@@ -260,6 +260,7 @@ let contador = 0
                 break;
 
                 default:
+                    alert("Ops! Não possuimos esta opção, tente novamente!")
                     break;
             }
         } while (desejar != "8");
